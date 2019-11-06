@@ -2,7 +2,7 @@
 CREATE TABLE t_measure
 (
 	id_messure int NOT NULL,
-	names varchar(4) NOT NULL,
+	names varchar(40) NOT NULL,
 	CONSTRAINT pk_messure PRIMARY KEY (id_messure)
 );
 
@@ -88,7 +88,8 @@ CREATE TABLE t_deliver
 	id_section int NOT NULL,
 	deliver_date date NOT NULL,
 	CONSTRAINT fk_deliver_material FOREIGN KEY (id_material) REFERENCES t_material (id_material),
-	CONSTRAINT fk_deliver_section FOREIGN KEY (id_section) REFERENCES t_section (id_section)
+	CONSTRAINT fk_deliver_section FOREIGN KEY (id_section) REFERENCES t_section (id_section),
+	CONSTRAINT fk_deliver_store FOREIGN KEY (id_store) REFERENCES t_store(id_store)
 );
 
 /*Zadanie 2*/
