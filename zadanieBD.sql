@@ -21,7 +21,7 @@ CREATE TABLE t_material
 	id_material int NOT NULL,
 	price_date date NOT NULL,
 	price numeric(10, 2) CHECK (price >= 0),
-	CONSTRAINT pk_inprice PRIMARY KEY,
+	CONSTRAINT pk_inprice PRIMARY KEY (id_inprice),
 	CONSTRAINT fk_inprice_material FOREIGN KEY (id_material) REFERENCES t_material (id_material)
 );
 
@@ -38,7 +38,7 @@ CREATE TABLE t_surplus
 	id_store int NOT NULL,
 	id_material int NOT NULL,
 	volume int NOT NULL,
-	CONSTRAINT pk_surplus PRIMARY KEY,
+	CONSTRAINT pk_surplus PRIMARY KEY (id_surplus),
 	CONSTRAINT fk_surplus_material FOREIGN KEY (id_material) REFERENCES t_material (id_material),
 	CONSTRAINT fk_surplus_store FOREIGN KEY (id_store) REFERENCES t_store (id_store)
 );
@@ -92,7 +92,7 @@ CREATE TABLE t_deliver
 	id_store int NOT NULL,
 	id_section int NOT NULL,
 	deliver_date date NOT NULL,
-	CONSTRAINT pk_section PRIMARY KEY,
+	CONSTRAINT pk_deliver PRIMARY KEY (id_deliver),
 	CONSTRAINT fk_deliver_material FOREIGN KEY (id_material) REFERENCES t_material (id_material),
 	CONSTRAINT fk_deliver_section FOREIGN KEY (id_section) REFERENCES t_section (id_section),
 	CONSTRAINT fk_deliver_store FOREIGN KEY (id_store) REFERENCES t_store(id_store)
@@ -115,7 +115,7 @@ CREATE TABLE t_group
 	id_material int NOT NULL,
 	id_group int NOT NULL,
 	name_material int NOT NULL,
-	CONSTRAINT pk_group PRIMARY KEY,
+	CONSTRAINT pk_group PRIMARY KEY (id_group),
 	CONSTRAINT fk_group_material FOREIGN KEY (id_material) REFERENCES t_material (id_material) ON DELETE SET NULL
 );
 /*Zadanie 5*/
