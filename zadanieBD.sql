@@ -17,9 +17,11 @@ CREATE TABLE t_material
 
  CREATE TABLE t_inprice 
  (
+ 	id_inprice
 	id_material int NOT NULL,
 	price_date date NOT NULL,
 	price numeric(10, 2) CHECK (price >= 0),
+	CONSTRAINT pk_inprice PRIMARY KEY,
 	CONSTRAINT fk_inprice_material FOREIGN KEY (id_material) REFERENCES t_material (id_material)
 );
 
@@ -32,9 +34,11 @@ CREATE TABLE t_store
 
 CREATE TABLE t_surplus
 (
+	id_surplus int NOT NULL,
 	id_store int NOT NULL,
 	id_material int NOT NULL,
 	volume int NOT NULL,
+	CONSTRAINT pk_surplus PRIMARY KEY,
 	CONSTRAINT fk_surplus_material FOREIGN KEY (id_material) REFERENCES t_material (id_material),
 	CONSTRAINT fk_surplus_store FOREIGN KEY (id_store) REFERENCES t_store (id_store)
 );
@@ -57,6 +61,7 @@ CREATE TABLE t_supply
 	id_material int NOT NULL,
 	supply_date date NOT NULL,
 	volume real NOT NULL,
+	CONSTRAINT pk_supply PRIMARY KEY (id_supply),
 	CONSTRAINT fk_supply_caterer FOREIGN KEY (id_caterer) REFERENCES t_caterer (id_caterer),
 	CONSTRAINT fk_supply_store FOREIGN KEY (id_store) REFERENCES t_store (id_store),
 	CONSTRAINT fk_supply_material FOREIGN KEY (id_material) REFERENCES t_material (id_material)
@@ -87,6 +92,7 @@ CREATE TABLE t_deliver
 	id_store int NOT NULL,
 	id_section int NOT NULL,
 	deliver_date date NOT NULL,
+	CONSTRAINT pk_section PRIMARY KEY,
 	CONSTRAINT fk_deliver_material FOREIGN KEY (id_material) REFERENCES t_material (id_material),
 	CONSTRAINT fk_deliver_section FOREIGN KEY (id_section) REFERENCES t_section (id_section),
 	CONSTRAINT fk_deliver_store FOREIGN KEY (id_store) REFERENCES t_store(id_store)
@@ -98,7 +104,6 @@ DROP address,
 ADD legal_address text,
 ADD fact_address text,
 ADD mail varchar(250);
-
 /*Zadanie 3*/
 ALTER TABLE t_inprice
 DROP CONSTRAINT fk_inprice_material,
@@ -110,7 +115,7 @@ CREATE TABLE t_group
 	id_material int NOT NULL,
 	id_group int NOT NULL,
 	name_material int NOT NULL,
+	CONSTRAINT pk_group PRIMARY KEY,
 	CONSTRAINT fk_group_material FOREIGN KEY (id_material) REFERENCES t_material (id_material) ON DELETE SET NULL
 );
 /*Zadanie 5*/
-?
