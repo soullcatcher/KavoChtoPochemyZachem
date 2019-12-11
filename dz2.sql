@@ -36,17 +36,17 @@ start with 1
 increment by 1;
 
 insert into t_inprice (id_inprice,price, price_date, id_material)
-	values (nextval('seq_inprice'), '100' '09.10.1900', '1');
-insert into t_inprice (price, price_date, id_material)
-	values (nextval('seq_inprice'), '56' '08.10.1900', '2');
-insert into t_inprice (price, price_date, id_material)
-	values (nextval('seq_inprice'), '89' '07.10.1900', '3');
-insert into t_inprice (price, price_date, id_material)
-	values (nextval('seq_inprice'), '129' '04.10.1900', '4');
-insert into t_inprice (price, price_date, id_material)
-	values (nextval('seq_inprice'), '302' '03.10.1900', '5');
-insert into t_inprice (price, price_date, id_material)
-	values (nextval('seq_inprice'), '299' '02.10.1900', '6');
+	values (nextval('seq_inprice'), '100', '09.10.1900', '1');
+insert into t_inprice (id_inprice,price, price_date, id_material)
+	values (nextval('seq_inprice'), '56', '08.10.1900', '2');
+insert into t_inprice (id_inprice,price, price_date, id_material)
+	values (nextval('seq_inprice'), '89', '07.10.1900', '3');
+insert into t_inprice (id_inprice,price, price_date, id_material)
+	values (nextval('seq_inprice'), '129', '04.10.1900', '4');
+insert into t_inprice (id_inprice,price, price_date, id_material)
+	values (nextval('seq_inprice'), '302', '03.10.1900', '5');
+insert into t_inprice (id_inprice,price, price_date, id_material)
+	values (nextval('seq_inprice'), '299', '02.10.1900', '6');
 
 CREATE SEQUENCE seq_store
 start with 1
@@ -97,7 +97,7 @@ CREATE SEQUENCE seq_employer
 start with 1
 increment by 1;
 
-insert into t_employer (id_employer, names, father_name, surname, dateofbirth, relationship)
+insert into t_employer (id_employer, names, father_name, surname)
 	values (nextval('seq_employer'), 'Саша', 'Ильич', 'Смэрдев');
 insert into t_employer (id_employer, names, father_name, surname)
 	values (nextval('seq_employer'), 'Андрей', 'Павлович', 'Новикав');
@@ -113,15 +113,15 @@ start with 1
 increment by 1;
 
 insert into t_section (id_section, names, id_employer)
-	values (nextval('seq_section'), 'Строительные материалы', '1');
+	values (nextval('seq_section'), 'Строительный цех', '4');
 insert into t_section (id_section, names, id_employer)
-	values (nextval('seq_section'), 'Лакокрасочные материалы', '1');
+	values (nextval('seq_section'), 'Лакокрасочный цех', '2');
 insert into t_section (id_section, names, id_employer)
-	values (nextval('seq_section'), 'Инструменты', '1');
+	values (nextval('seq_section'), 'Инструментальный цех', '3');
 insert into t_section (id_section, names, id_employer)
-	values (nextval('seq_section'), 'Тяжелый груз', '1');
+	values (nextval('seq_section'), 'Цех по обработке метала', '5');
 insert into t_section (id_section, names, id_employer)
-	values (nextval('seq_section'), 'Легкий груз', '1');
+	values (nextval('seq_section'), 'Цех обработки дерева', '1');
 
 CREATE SEQUENCE seq_deliver
 start with 1
@@ -171,6 +171,8 @@ insert into t_group (id_group, id_material,name_material)
 /*8*/
 DELETE FROM t_inprice WHERE price_date < '31.12.2000';
 /*9*/
+DELETE FROM t_supply WHERE id_material = 4;
+DELETE FROM t_deliver WHERE id_material = 4;
 DELETE FROM t_material WHERE id_messure = 2;
 DELETE FROM t_measure WHERE id_messure = 2;
 /*10*/
@@ -179,11 +181,11 @@ SET volume = 0
 WHERE id_store = '2';
 /*11*/
 ALTER TABLE t_employer
-ADD dateofbirth date NOT NULL,
-ADD	relationship varchar (100) NOT NULL;
+ADD dateofbirth date,
+ADD	relationship varchar (100);
 
 UPDATE t_employer
-SET dateofbirth = '31.10.1850',
+SET dateofbirth = '31.10.1850'
 WHERE id_employer = '1';
 
 UPDATE t_employer
